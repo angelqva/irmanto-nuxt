@@ -1,11 +1,8 @@
 <template>
-	<div class="container-fluid">
+	<div class="container-fluid m-0 p-0">
 		<PreLoader2 />
-		<LayoutHomeNavbar />
-		<div class="row">
-			<div class="col-12">
-				<slot />
-			</div>
-		</div>
+		<LayoutHomeNavPortada />
+		<slot>Content page</slot>
 	</div>
 </template>
+<style></style>

@@ -1,108 +1,20 @@
 <template>
 	<NuxtLayout :name="layout">
-		<div class="row mt-7 justify-content-center">
-			<div class="col-12">
-				<h1 class="text-center mb-4">Home</h1>
-			</div>
-			<div class="col-12 col-sm-6 col-md-4 mb-8">
-				<div class="card">
-					<div class="card-header pb-0">
-						<h2 class="text-center">Formulario</h2>
-						<p class="text-center fs-5 mb-0">
-							Descripcion del formulario
+		<div class="cContent">
+			<div class="cContent__left"></div>
+			<div class="cContent__right"></div>
+		</div>
+		<div class="container mt-0">
+			<div class="cContainer cContainer--justify-end">
+				<div class="cBoxInfo">
+					<div class="cBoxInfo__card shadow-lg">
+						<h2 class="cBoxInfo__h2">Estamos Dedicados a la Excelencia en la Reparación y Mantenimiento.</h2>
+						<p class="cBoxInfo__p">
+							Contamos con exelentes trabajadores dedicados a resolver lo antes posible los problemas de nuestros clientes. Estamos atentos a sus solicitudes 24/7.
 						</p>
-					</div>
-					<div class="card-body">
-						<div class="mx-md-5 mx-2">
-							<FormText
-								v-model.number="data.nombre.value"
-								v-model:valido="data.nombre.valido"
-								v-model:errorBackend="data.nombre.errorBackend"
-								:label="data.nombre.label"
-								:minLength="3"
-								:maxLength="20"
-								:placeholder="'Introduzca el nombre'"
-								:required="true"
-								regExp="^[a-zA-Z]*$"
-								reg-exp-feed-back="Solo se aceptan caracteres de a-z A-Z sin espacios"
-							/>
-							<FormNumber
-								v-model="data.edad.value"
-								v-model:valido="data.edad.valido"
-								v-model:errorBackend="data.edad.errorBackend"
-								:label="data.edad.label"
-								:placeholder="'Introduzca la edad'"
-								:minValue="data.edad.min"
-								:maxValue="data.edad.max"
-								:type="data.edad.type"
-								:required="true"
-							/>
-							<FormPassword
-								v-model="data.password.value"
-								v-model:valido="data.password.valido"
-								v-model:errorBackend="
-									data.password.errorBackend
-								"
-								:label="data.password.label"
-								:placeholder="'Introduzca el password'"
-								:minLength="7"
-								:maxLength="50"
-								:required="true"
-							/>
-							<FormEmial
-								v-model="data.email.value"
-								v-model:valido="data.email.valido"
-								v-model:errorBackend="data.email.errorBackend"
-								:label="data.email.label"
-								:placeholder="'Introduzca el email'"
-								:minLength="5"
-								:maxLength="50"
-								:required="true"
-							/>
-							<FormSelect
-								v-model="data.opcion.value"
-								v-model:valido="data.opcion.valido"
-								v-model:errorBackend="
-									data.opciones.errorBackend
-								"
-								:label="data.opcion.label"
-								:data="opcionesData"
-								:required="data.opcion.required"
-							/>
-							<FormMultipleSelect
-								v-model="data.opciones.value"
-								v-model:valido="data.opciones.valido"
-								v-model:errorBackend="
-									data.opciones.errorBackend
-								"
-								:label="data.opciones.label"
-								:data="opcionesData"
-								:required="data.opciones.required"
-							/>
-							<FormAreaText
-								v-model="data.textarea.value"
-								v-model:valido="data.textarea.valido"
-								v-model:errorBackend="
-									data.textarea.errorBackend
-								"
-								:label="data.textarea.label"
-								:placeholder="'Introduzca la descripcion'"
-								:minLength="data.textarea.minLength"
-								:maxLength="data.textarea.maxLength"
-								:required="data.textarea.required"
-							/>
-							<FormCheck
-								:label="data.check.label"
-								v-model="data.check.value"
-								v-model:error-backend="data.check.errorBackend"
-								v-model:valido="data.check.valido"
-							/>
-							<button
-								@click="clog"
-								class="btn btn-dark w-100 mt-3 mb-3"
-							>
-								Console Log
-							</button>
+						<div class="cBoxActions">
+							<a href="#" class="btn btn-lg mb-0 bg-gradient-gold">Autenticarse</a>
+							<a href="#" class="btn btn-lg mb-0 bg-gradient-dark">Tienes Cuenta? Registrate Ahora</a>
 						</div>
 					</div>
 				</div>
@@ -110,104 +22,64 @@
 		</div>
 	</NuxtLayout>
 </template>
-<style scoped></style>
-<script setup lang="ts">
-	import { reactive, onMounted, onUnmounted } from "vue";
+<script lang="ts" setup>
 	const layout: string = "home";
-	interface DataOption {
-		label: string;
-		value: any;
-	}
-	const data = reactive({
-		nombre: {
-			label: "Nombre:",
-			value: "",
-			errorBackend: "",
-			valido: false,
-			required: true,
-		},
-		edad: {
-			label: "Edad:",
-			value: NaN,
-			min: 4,
-			max: 150,
-			type: "int",
-			errorBackend: "",
-			valido: false,
-			required: true,
-		},
-		password: {
-			label: "Contraseña:",
-			value: "",
-			minLength: 7,
-			maxLength: 30,
-			required: true,
-			valido: false,
-			errorBackend: "",
-		},
-		email: {
-			label: "Correo:",
-			value: "",
-			minLength: 5,
-			maxLength: 50,
-			required: true,
-			valido: false,
-			errorBackend: "",
-		},
-		opcion: {
-			label: "Opcion Single:",
-			value: {},
-			required: true,
-			valido: false,
-			errorBackend: "",
-		},
-		opciones: {
-			label: "Opciones multiples:",
-			value: new Array<DataOption>(),
-			required: true,
-			valido: false,
-			errorBackend: "",
-		},
-		textarea: {
-			label: "Descripción:",
-			value: "",
-			minLength: 3,
-			maxLength: 500,
-			required: true,
-			valido: false,
-			errorBackend: "",
-		},
-		check: {
-			label: "Marque si Acepta",
-			value: false,
-			valido: true,
-			errorBackend: "",
-		},
-	});
-	const opcionesData = [
-		{
-			label: "Opcion 1",
-			value: 1,
-		},
-		{ label: "Opcion 2", value: 2 },
-		{ label: "Opcion 3", value: 3 },
-		{ label: "Opcion 4", value: 4 },
-		{ label: "Opcion 5", value: 5 },
-		{ label: "Opcion 6", value: 6 },
-	];
-	const clog = () => {
-		if (data.nombre.value !== "Angel") {
-			data.nombre.errorBackend = "El nombre debe ser Angel";
-		} else {
-			data.nombre.value = "";
-		}
-	};
-	onMounted(() => {
-		data.nombre.value = "";
-		data.edad.value = NaN;
-	});
-	onUnmounted(() => {
-		data.nombre.value = "";
-		data.edad.value = NaN;
-	});
 </script>
+<style>
+	.cContent {
+		position: absolute;
+		top: 200px;
+		left: 0px;
+		width: 100%;
+		display: flex;
+		flex-direction: row;
+		z-index: -5;
+	}
+	.cContent__left {
+		width: 65%;
+		background-image: url("@/assets/img/split/installing-an-air-conditioner-in-an-apartment-offi-2021-12-09-22-09-41-utc-min.jpg");
+		background-size: cover;
+		height: 719px;
+	}
+	.cContent__right {
+		background-color: #0b1b69;
+		width: 35%;
+		height: 719px;
+	}
+	.cBoxInfo {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 719px;
+		width: 800px;
+	}
+	.cBoxInfo__card {
+		background-color: white;
+		width: 700px;
+		height: 463px;
+		border-radius: 4px;
+		padding: 40px;
+	}
+	.cBoxInfo__h2 {
+		font-size: 46px;
+	}
+	.cBoxInfo__p {
+		font-size: 22px;
+	}
+	.cBoxActions {
+		display: flex;
+		flex-direction: row;
+		margin-top: 40px;
+		justify-content: space-around;
+	}
+	.btn.bg-gradient-gold {
+		color: #1e293b;
+		border-color: #1e293b;
+		background-image: linear-gradient(310deg, #ffd700 0%, #ffd700 100%);
+	}
+	.btn.bg-gradient-gold:hover {
+		color: #ffffff;
+		border-color: transparent;
+		background-image: linear-gradient(310deg, #1e293b 0%, #1e293b 100%);
+	}
+</style>
